@@ -1,0 +1,33 @@
+name: Build CI3 App and Upload Artifact
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-ci3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Extract Commit Message
+        run: |
+          RAW_MSG="${{ github.event.head_commit.message }}"
+          SAFE_COMMIT_MSG=$(echo "$RAW_MSG" | sed 's/[^[:alnum:]]/-/g' | sed 's/-\{2,\}/-/g' | sed 's/^-//;s/-$//')
+          echo "COMMIT_MSG=$SAFE_COMMIT_MSG" >> $GITHUB_ENV
+
+      - name: Package CI3 App
+        run: zip -r "${{ github.event.repository.name }}-${{ env.COMMIT_MSG }}.zip" .
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-${{ env.COMMIT_MSG }}
+          path: ${{ github.event.repository.name }}-${{ env.COMMIT_MSG }}.zip
