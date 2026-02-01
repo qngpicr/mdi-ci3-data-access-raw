@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>csr-device-total</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+    <h2 class="mb-3">device 테이블 (CSR)</h2>
+
+    <table id="deviceTable" class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>id_device</th>
+                <th>name_device</th>
+                <th>id_cpu</th>
+                <th>lineup_device</th>
+                <th>release_device</th>
+                <th>weight_device</th>
+                <th>type_code_device</th>
+                <th>manf_code_device</th>
+            </tr>
+        </thead>
+        <tbody id="deviceBody">
+            <tr><td colspan="8" class="text-center text-muted">데이터 로딩 중...</td></tr>
+        </tbody>
+    </table>
+
+    <!-- JS로 REST API 호출 -->
+    <script src="/assets/js/fetch/device-rest-fetch.js"></script>
+</body>
+</html>
