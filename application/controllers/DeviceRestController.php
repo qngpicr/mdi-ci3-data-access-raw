@@ -7,16 +7,29 @@ class DeviceRestController extends CI_Controller {
         parent::__construct();
         $this->load->model('DeviceModel');
         $this->output->set_content_type('application/json'); // 모든 응답을 JSON으로
+
+        // 공통적으로 모든 요청에 CORS 헤더 추가
+        // header("Access-Control-Allow-Origin: *");
+        // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        // header("Access-Control-Allow-Headers: Content-Type, Authorization");
     }
 
     // GET /api/devices
     public function index() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $devices = $this->DeviceModel->selectAllDevices();
         echo json_encode($devices);
     }
 
     // GET /api/devices/{id}
     public function show($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $device = $this->DeviceModel->selectDeviceById($id);
         if ($device) {
             echo json_encode($device);
@@ -28,6 +41,10 @@ class DeviceRestController extends CI_Controller {
 
     // POST /api/devices
     public function create() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $data = json_decode($this->input->raw_input_stream, true);
         $id = $this->DeviceModel->insertDevice($data);
         $device = $this->DeviceModel->selectDeviceById($id);
@@ -38,6 +55,10 @@ class DeviceRestController extends CI_Controller {
 
     // PUT /api/devices/{id}
     public function update($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $data = json_decode($this->input->raw_input_stream, true);
         $success = $this->DeviceModel->updateDevice($id, $data);
 
@@ -52,6 +73,10 @@ class DeviceRestController extends CI_Controller {
 
     // DELETE /api/devices/{id}
     public function delete($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $success = $this->DeviceModel->deleteDevice($id);
         if ($success) {
             $this->output->set_status_header(204); // No Content

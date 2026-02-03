@@ -7,16 +7,29 @@ class MemberRestController extends CI_Controller {
         parent::__construct();
         $this->load->model('MemberModel'); // DB 모델 로드
         $this->output->set_content_type('application/json'); // 모든 응답을 JSON으로
+
+        // 공통적으로 모든 요청에 CORS 헤더 추가
+        // header("Access-Control-Allow-Origin: *");
+        // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        // header("Access-Control-Allow-Headers: Content-Type, Authorization");
     }
 
     // GET /api/members
     public function index() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $members = $this->MemberModel->selectAllMembers();
         echo json_encode($members);
     }
 
     // GET /api/members/{id}
     public function show($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $member = $this->MemberModel->selectMemberById($id);
         if ($member) {
             echo json_encode($member);
@@ -28,6 +41,10 @@ class MemberRestController extends CI_Controller {
 
     // POST /api/members
     public function create() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $data = json_decode($this->input->raw_input_stream, true);
         $id = $this->MemberModel->insertMember($data);
         $member = $this->MemberModel->selectMemberById($id);
@@ -38,6 +55,10 @@ class MemberRestController extends CI_Controller {
 
     // PUT /api/members/{id}
     public function update($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $data = json_decode($this->input->raw_input_stream, true);
         $affected = $this->MemberModel->updateMember($id, $data);
 
@@ -52,6 +73,10 @@ class MemberRestController extends CI_Controller {
 
     // DELETE /api/members/{id}
     public function delete($id) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
         $affected = $this->MemberModel->deleteMember($id);
         if ($affected > 0) {
             $this->output->set_status_header(204); // No Content
