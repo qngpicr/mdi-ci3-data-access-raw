@@ -17,12 +17,9 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
-# IDE Files
-#-------------------------
 /nbproject/
 .idea/*
 
-## Sublime Text cache files
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
@@ -30,6 +27,3 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
-
-# Database config (CI3)
-application/config/database.php
