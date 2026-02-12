@@ -6,18 +6,18 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'      => '',
-    'hostname' => getenv('DB_HOST') ?: 'localhost',
-    'username' => getenv('DB_USER') ?: 'root',
-    'password' => getenv('DB_PASS') ?: '',
-    'database' => getenv('DB_NAME') ?: '',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => (ENVIRONMENT !== 'production'),
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8mb4',
-    'dbcollat' => 'utf8mb4_general_ci',
+    'hostname' => 'localhost',     // DB 서버 호스트
+    'username' => 'cougar',        // DB 사용자명
+    'password' => 'wild',          // DB 비밀번호
+    'database' => 'mdi_db',        // DB 이름
+    'dbdriver' => 'mysqli',        // 드라이버 (MySQLi)
+    'dbprefix' => '',              // 테이블 prefix
+    'pconnect' => FALSE,           // 영구 연결 여부
+    'db_debug' => (ENVIRONMENT !== 'production'), // 디버그 모드
+    'cache_on' => FALSE,           // 쿼리 캐시 여부
+    'cachedir' => '',              // 캐시 디렉토리
+    'char_set' => 'utf8mb4',       // 문자셋
+    'dbcollat' => 'utf8mb4_general_ci', // Collation
     'swap_pre' => '',
     'encrypt'  => FALSE,
     'compress' => FALSE,
