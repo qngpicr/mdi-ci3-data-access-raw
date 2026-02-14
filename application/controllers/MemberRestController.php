@@ -21,7 +21,7 @@ class MemberRestController extends CI_Controller {
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
         $members = $this->MemberModel->selectAllMembers();
-        echo json_encode($members);
+        $this->output->set_output(json_encode($members));
     }
 
     // GET /api/members/{id}
@@ -32,10 +32,10 @@ class MemberRestController extends CI_Controller {
 
         $member = $this->MemberModel->selectMemberById($id);
         if ($member) {
-            echo json_encode($member);
+            $this->output->set_output(json_encode($member));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Member not found']);
+            $this->output->set_output(json_encode(['error' => 'Member not found']));
         }
     }
 
@@ -50,7 +50,7 @@ class MemberRestController extends CI_Controller {
         $member = $this->MemberModel->selectMemberById($id);
 
         $this->output->set_status_header(201);
-        echo json_encode($member);
+        $this->output->set_output(json_encode($member));
     }
 
     // PUT /api/members/{id}
@@ -64,10 +64,10 @@ class MemberRestController extends CI_Controller {
 
         if ($affected > 0) {
             $member = $this->MemberModel->selectMemberById($id);
-            echo json_encode($member);
+            $this->output->set_output(json_encode($member));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Member not found or not updated']);
+            $this->output->set_output(json_encode(['error' => 'Member not found or not updated']));
         }
     }
 
@@ -82,7 +82,7 @@ class MemberRestController extends CI_Controller {
             $this->output->set_status_header(204); // No Content
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Member not found']);
+            $this->output->set_output(json_encode(['error' => 'Member not found']));
         }
     }
 }

@@ -21,7 +21,7 @@ class CpuRestController extends CI_Controller {
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
         $cpus = $this->CpuModel->selectAllCpus();
-        echo json_encode($cpus);
+        $this->output->set_output(json_encode($cpus));
     }
 
     // GET /api/cpus/{id}
@@ -32,10 +32,10 @@ class CpuRestController extends CI_Controller {
 
         $cpu = $this->CpuModel->selectCpuById($id);
         if ($cpu) {
-            echo json_encode($cpu);
+            $this->output->set_output(json_encode($cpu));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'CPU not found']);
+            $this->output->set_output(json_encode(['error' => 'CPU not found']));
         }
     }
 
@@ -50,7 +50,7 @@ class CpuRestController extends CI_Controller {
         $cpu = $this->CpuModel->selectCpuById($id);
 
         $this->output->set_status_header(201);
-        echo json_encode($cpu);
+        $this->output->set_output(json_encode($cpu));
     }
 
     // PUT /api/cpus/{id}
@@ -64,10 +64,10 @@ class CpuRestController extends CI_Controller {
 
         if ($affected > 0) {
             $cpu = $this->CpuModel->selectCpuById($id);
-            echo json_encode($cpu);
+            $this->output->set_output(json_encode($cpu));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'CPU not found or not updated']);
+            $this->output->set_output(json_encode(['error' => 'CPU not found or not updated']));
         }
     }
 
@@ -82,7 +82,7 @@ class CpuRestController extends CI_Controller {
             $this->output->set_status_header(204); // No Content
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'CPU not found']);
+            $this->output->set_output(json_encode(['error' => 'CPU not found']));
         }
     }
 }

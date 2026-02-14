@@ -21,7 +21,7 @@ class DeviceRestController extends CI_Controller {
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
         $devices = $this->DeviceModel->selectAllDevices();
-        echo json_encode($devices);
+        $this->output->set_output(json_encode($devices));
     }
 
     // GET /api/devices/{id}
@@ -32,10 +32,10 @@ class DeviceRestController extends CI_Controller {
 
         $device = $this->DeviceModel->selectDeviceById($id);
         if ($device) {
-            echo json_encode($device);
+            $this->output->set_output(json_encode($device));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Device not found']);
+            $this->output->set_output(json_encode(['error' => 'Device not found']));
         }
     }
 
@@ -50,7 +50,7 @@ class DeviceRestController extends CI_Controller {
         $device = $this->DeviceModel->selectDeviceById($id);
 
         $this->output->set_status_header(201);
-        echo json_encode($device);
+        $this->output->set_output(json_encode($device));
     }
 
     // PUT /api/devices/{id}
@@ -64,10 +64,10 @@ class DeviceRestController extends CI_Controller {
 
         if ($success) {
             $device = $this->DeviceModel->selectDeviceById($id);
-            echo json_encode($device);
+            $this->output->set_output(json_encode($device));
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Device not found or not updated']);
+            $this->output->set_output(json_encode(['error' => 'Device not found or not updated']));
         }
     }
 
@@ -82,7 +82,7 @@ class DeviceRestController extends CI_Controller {
             $this->output->set_status_header(204); // No Content
         } else {
             $this->output->set_status_header(404);
-            echo json_encode(['error' => 'Device not found']);
+            $this->output->set_output(json_encode(['error' => 'Device not found']));
         }
     }
 }
